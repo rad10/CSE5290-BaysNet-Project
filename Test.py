@@ -1,4 +1,4 @@
-from DAG import *
+from Elements import *
 
 # Create graph.
 testGraph = Graph()
