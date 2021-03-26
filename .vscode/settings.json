@@ -1,0 +1,25 @@
+{
+    "files.exclude": {
+        "**/.pyc": true
+    },
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.trimAutoWhitespace": true,
+    "editor.unusualLineTerminators": "auto",
+    "editor.useTabStops": true,
+    "files.autoSave": "afterDelay",
+    "files.defaultLanguage": "python",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.terminal.executeInFileDir": true,
+    /* Git settings and validations */
+    "git.fetchOnPull": true,
+    "git.autofetch": true,
+    "git.autoStash": true,
+    "git.autorefresh": true,
+    "git.enabled": true,
+    "git.pullTags": true
+}
