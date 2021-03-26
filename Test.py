@@ -1,4 +1,5 @@
 from Elements import *
+from Functions import *
 
 # Create graph.
 testGraph = Graph()
@@ -30,3 +31,8 @@ Earthquake.print_table()
 Alarm.print_table()
 JohnCall.print_table()
 MaryCall.print_table()
+
+# Test case. (P(J | M))
+queryVar = [JohnCall]
+evidence = [MaryCall] # Note: In this example, this should be set to True at all times.
+test = enumeration_ask(queryVar, evidence, testGraph)
