@@ -1,11 +1,31 @@
 from Elements import Node
 from copy import deepcopy
 
+
 def normalize(arr: list) -> list:
     total = sum(arr)
     for i in range(len(arr)):
         arr[i] /= total
     return arr
+
+
+def get_roots(element: Node) -> set:
+    """ Gets the roots of a given node
+    @param element the element that you want to get
+    @returns the set that contains all roots to the given element
+    """
+    results = set()
+    if len(element.get_dependencies()) == 0:
+        return set(element)  # return itself because it is itself a root
+    for i in element.get_dependencies():
+        if len(i.get_dependencies()) == 0:
+            # if the element being checked has no dependencies, then it is a root
+            results.add(i)
+        else:
+            # if not, ask the element what its roots are
+            results.add(get_roots(i))
+    return results
+
 
 def enumeration_ask(vars, evidence, network):
     # There has to be a query variable.
@@ -18,7 +38,7 @@ def enumeration_ask(vars, evidence, network):
     # Query cannot be part of evidence.
     if query in evidence:
         return print("Query must differ from evidence.")
-    else:   
+    else:
         # For query = True, insert normal probabilistic values and enumerate.
         observed = deepcopy(evidence)
         observed.append(query)
