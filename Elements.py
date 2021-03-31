@@ -22,6 +22,8 @@ class Node:
         self.probability_values = probability_values
         self.used_by = list()
 
+    def __str__(self):
+        return self.key
     # def __init__(self, key: str, name: str, probability: float) -> None:
     #     self.key = key
     #     self.name = name
