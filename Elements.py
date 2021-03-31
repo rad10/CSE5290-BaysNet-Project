@@ -24,17 +24,6 @@ class Node:
 
     def __str__(self):
         return self.key
-    # def __init__(self, key: str, name: str, probability: float) -> None:
-    #     self.key = key
-    #     self.name = name
-    #     self.probability_links = None
-    #     self.probability_values = [probability]
-    #     self.used_by = list()
-
-    # def link_source(self, key: str, node: Node) -> None:
-    #     """Sets a node to be a source for a given value
-    #     """
-    #     self.probability_links[key] = node
 
     def link_source(self, node: Node) -> None:
         """Sets a node to be a source for a given value
@@ -95,11 +84,6 @@ class Graph:
         """gives the container for the nodes"""
         return self.network
 
-    # def __call__(self, index: int) -> Node:
-    #     """Returns the node in the network at the given index
-    #     """
-    #     return self.network[index]
-
     def find_independent(self) -> list:
         """Gets a list of independent nodes
         @returns a list of nodes that have no dependencies
@@ -128,12 +112,6 @@ class Graph:
         index = self.network.index(network_node)
         self.network[index] = node
 
-    # def replace_node(self, node_index: int, node: Node) -> None:
-    #     """Replaces a given node with another node
-    #     @param node_index the index in the network to replace the given node
-    #     """
-    #     self.network[node_index] = node
-
     def set_arc(self, parent: Node, child: Node) -> None:
         """Set the arc between the given parent and child nodes
         @param parent the node that should be a source of data for the child
@@ -151,22 +129,3 @@ class Graph:
         child = self.network[self.network.index(child)]
         parent.link_dependent(child)
         child.link_source(parent)
-
-    # def set_arc(self, pindex: int, cindex: int) -> None:
-    #     """Set the arc between the given parent and child nodes
-    #     @param pindex the index of the parent in the network
-    #     @param cindex the index of the child in the network
-    #     """
-    #     # First check that there arent too many arcs currently
-    #     if (self.arcs > 15):
-    #         print("ERROR: Too many arcs in the current network")
-    #         return
-    #     # Check that adding this arc wont make network cyclic
-    #     if (len(self.find_independent()) <= 1):
-    #         print("ERROR: Cannot add this arc as it would make network cyclic")
-    #         return
-    #     parent = self.network[pindex]
-    #     child = self.network[cindex]
-    #     parent.link_dependent(child)
-    #     child.link_source(parent)
-    #     self.arcs += 1
