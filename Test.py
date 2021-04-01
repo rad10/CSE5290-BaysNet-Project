@@ -34,5 +34,12 @@ MaryCall.print_table()
 
 # Test case. (P(J | M))
 queryVar = [JohnCall]
-evidence = [MaryCall] # Note: In this example, this should be set to True at all times.
-test = enumeration_ask(queryVar, evidence, testGraph)
+# Note: In this example, this should be set to True at all times.
+evidence = [MaryCall]
+
+
+# print(Alarm())
+# print(Alarm({"B": False, "E": True}))
+
+print(enumeration_all([MaryCall], {"M": True}))
+print(enumeration_ask([MaryCall], {}))
