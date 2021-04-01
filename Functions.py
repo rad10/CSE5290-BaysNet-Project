@@ -21,7 +21,10 @@ def get_roots(element: Node) -> set:
             results.add(i)
         else:
             # if not, ask the element what its roots are
-            results.add(get_roots(i))
+            results.update(get_roots(i))
+    return results
+
+
     return results
 
 
