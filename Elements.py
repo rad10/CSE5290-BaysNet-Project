@@ -30,8 +30,8 @@ class Node:
         # Checking if constants has vars that dont exist
         if (constant_deps != None):
             for c in constant_deps:
-                assert c in map(
-                    str, self.probability_links), f"{c} is not a dependency of {self}, {list(map(str, self.probability_links))}"
+                assert c in self.probability_links.keys(
+                ), f"{c} is not a dependency of {self}, {set(self.probability_links.keys())}"
         # check if there are no constant dependencies
         if (constant_deps == None):
             return self.probability_values.copy()
