@@ -76,7 +76,7 @@ class Node:
         """Adds a node as a dependency"""
         self.used_by.append(node)
 
-    def get_dependencies(self)->list:
+    def get_dependencies(self) -> list:
         """Gets a list of all dependencies"""
         if self.probability_links:
             return [a for a in self.probability_links]
@@ -161,8 +161,9 @@ class Graph:
         # First check that there arent too many arcs currently
         assert self.arcs <= 15, "Too many arcs in the current network. Max: 15"
         # Check that adding this arc wont make network cyclic
-        assert self.find_independent()) > 1, "Cannot add this arc as it would make network cyclic"
-        parent=self.network[self.network.index(parent)]
-        child=self.network[self.network.index(child)]
+        assert len(self.find_independent()
+                   ) > 1, "Cannot add this arc as it would make network cyclic"
+        parent = self.network[self.network.index(parent)]
+        child = self.network[self.network.index(child)]
         parent.link_dependent(child)
         child.link_source(parent)
