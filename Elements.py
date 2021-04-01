@@ -25,6 +25,48 @@ class Node:
     def __str__(self):
         return self.key
 
+    def __call__(self, constant_deps: dict = None) -> list:
+        # Checking if constants has vars that dont exist
+        if (constant_deps != None):
+            for c in constant_deps:
+                if not c in map(str, self.probability_links):
+                    return
+                    # TODO: Make error exception to raise
+        # check if there are no constant dependencies
+        if (constant_deps == None):
+            return self.probability_values.copy()
+        # now to iterate through all items
+
+        # making copy of values to figure out final result via process of elimination
+        results = self.probability_values.copy()
+        headers = list(self.probability_links.keys())
+
+        def elimination(ind: int, adjust: int = 0) -> None:
+            if ind == len(headers):
+                return
+            # Does a binary search and sets nontrue to None
+            if headers[ind] in constant_deps.keys():
+                if constant_deps[headers[ind]]:
+                    for i in range(adjust + len(results) // 2 ** (ind + 1), adjust + len(results) // 2 ** ind):
+                        results[i] = None
+                    elimination(ind + 1)
+                else:
+                    for i in range(adjust + 0, adjust + len(results) // 2 ** (ind + 1)):
+                        results[i] = None
+                    elimination(ind + 1, len(results) // 2 ** (ind + 1))
+            else:
+                elimination(ind + 1)
+                elimination(ind + 1, len(results) // 2 ** (ind + 1))
+
+        # Eliminate values that are not used due to constants
+        elimination(0)
+
+        # Removing Nones from remainder of the list
+        while results.count(None) > 0:
+            results.remove(None)
+
+        return results
+
     def link_source(self, node: Node) -> None:
         """Sets a node to be a source for a given value
         """
