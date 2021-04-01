@@ -55,11 +55,7 @@ def get_history(element: Node) -> set:
     return results
 
 
-def enumeration_all(variables: list, observed: dict) -> float:
-    # contingency if variables is empty
-    if len(variables) == 0:
-        return 1
-
+def __enum(variables: list, observed: dict) -> list:
     # Get given variable that enumerate all gets probability for
     given: Node = variables[0]
     spackage = set()
@@ -107,32 +103,15 @@ def enumeration_all(variables: list, observed: dict) -> float:
             state[s.key] = iters[conditional][package.index(s)]
 
         sum_vals[conditional] *= given(state)[0]
-    return sum(sum_vals)
+    return sum_vals
 
 
-def enumeration_ask(vars: list, evidence: dict):
-    # There has to be a query variable.
-    if len(vars) == 0:
-        return 1.0
+def enumeration_all(variables: list, observed: dict) -> float:
+    # contingency if variables is empty
+    if len(variables) == 0:
+        return 1
+    return sum(__enum(variables, observed))
 
-    query = vars[0]
-    probability = []
 
-    # Query cannot be part of evidence.
-    assert query not in evidence, "Query must differ from evidence."
-
-    # For query = True, insert normal probabilistic values and enumerate.
-    observed = deepcopy(evidence)
-    observed.append(query)
-    # TODO: enumerate here (make new function and append result to probability)
-
-    # For query = False, insert probabilistic values - 1 and enumerate.
-    observed = deepcopy(evidence)
-    for x in range(0, len(query.probability_values)):
-        query.probability_values[x] = 1 - query.probability_values[x]
-    observed.append(query)
-    # TODO: enumerate here (make new function and append result to probability)
-
-    return normalize(probability)
-
-# TODO: def enumerate_all
+def enumeration_ask(vars: list, evidence: dict) -> list:
+    return normalize(__enum(vars, evidence))
