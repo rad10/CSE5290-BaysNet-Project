@@ -14,8 +14,9 @@ class Node:
     """
 
     def __init__(self, key: str, name: str, probability_values: list, probability_dependents: dict = None) -> None:
-        if (probability_dependents != None and len(probability_values) < 2 ** len(probability_dependents.keys())):
-            print("Error handling needed for not enough stats")
+        if probability_dependents:
+            assert len(probability_values) >= 2 ** len(probability_dependents.keys()
+                                                       ), f"Not enough truth table values given for amount of dependencies: {len(probability_values)} of {2 ** len(probability_dependents.keys())}"
         self.key = key
         self.name = name
         self.probability_links = probability_dependents
@@ -29,9 +30,8 @@ class Node:
         # Checking if constants has vars that dont exist
         if (constant_deps != None):
             for c in constant_deps:
-                if not c in map(str, self.probability_links):
-                    return
-                    # TODO: Make error exception to raise
+                assert c in map(
+                    str, self.probability_links), f"{c} is not a dependency of {self}, {list(map(str, self.probability_links))}"
         # check if there are no constant dependencies
         if (constant_deps == None):
             return self.probability_values.copy()
@@ -141,9 +141,8 @@ class Graph:
         """Adds a node to the network
         @param node the node to add
         """
-        if not (len(self.network) <= 10):
-            print("ERROR: Too many nodes attempted to be placed in network")
-            return
+        assert len(
+            self.network) <= 10, "Too many nodes attempted to be placed in network"
         self.network.append(node)
 
     def replace_node(self, network_node: Node, node: Node) -> None:
@@ -160,14 +159,10 @@ class Graph:
         @param child the node that depends on parent
         """
         # First check that there arent too many arcs currently
-        if (self.arcs > 15):
-            print("ERROR: Too many arcs in the current network")
-            return
+        assert self.arcs <= 15, "Too many arcs in the current network. Max: 15"
         # Check that adding this arc wont make network cyclic
-        if (len(self.find_independent()) <= 1):
-            print("ERROR: Cannot add this arc as it would make network cyclic")
-            return
-        parent = self.network[self.network.index(parent)]
-        child = self.network[self.network.index(child)]
+        assert self.find_independent()) > 1, "Cannot add this arc as it would make network cyclic"
+        parent=self.network[self.network.index(parent)]
+        child=self.network[self.network.index(child)]
         parent.link_dependent(child)
         child.link_source(parent)
