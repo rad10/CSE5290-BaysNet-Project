@@ -1,5 +1,6 @@
 from Elements import Node
 from copy import deepcopy
+from itertools import product
 
 
 def normalize(arr: list) -> list:
@@ -48,6 +49,61 @@ def get_history(element: Node) -> set:
     for elm in element.get_dependencies():
         results.update(get_history(elm))
     return results
+
+
+def enumeration_all(variables: list, observed: dict) -> float:
+    # contingency if variables is empty
+    if len(variables) == 0:
+        return 1
+
+    # Get given variable that enumerate all gets probability for
+    given: Node = variables[0]
+    spackage = set()
+    if len(variables) > 1:
+        spackage.update(variables[1:])
+    # include everything up to roots
+    for i in variables:
+        spackage.update(get_history(i))
+
+    # convert back to list to keep indexes
+    package = list(spackage)
+
+    # making table of conditions
+    conditions = [[True, False] for a in package]
+
+    # Changing boolean sets based on observed
+    for key in observed.keys():
+        if get_node(key, package):
+            conditions[package.index(get_node(key, package))] = [observed[key]]
+    iters = list(product(*conditions))
+    sum_vals = [1 for a in iters]
+
+    for conditional in range(len(sum_vals)):
+        for node in range(len(package)):
+            # making dict to get what values both have in common
+            pstate = spackage.intersection(package[node].get_dependencies())
+            state = dict()
+            for s in pstate:
+                state[s.key] = iters[conditional][package.index(s)]
+
+            pval = float()
+            if (len(pstate) == 0):
+                pval = package[node]()[0]
+            else:
+                pval = package[node](state)[0]
+            if not iters[conditional][node]:
+                pval = 1 - pval
+
+            sum_vals[conditional] *= pval
+
+        # Getting dictionary differences for the given variable
+        pstate = spackage.intersection(given.get_dependencies())
+        state = dict()
+        for s in pstate:
+            state[s.key] = iters[conditional][package.index(s)]
+
+        sum_vals[conditional] *= given(state)[0]
+    return sum(sum_vals)
 
 
 def enumeration_ask(vars, evidence, network):
