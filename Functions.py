@@ -7,6 +7,19 @@ def normalize(arr: list) -> list:
     return list(map(lambda x: x / total, arr))
 
 
+def get_node(label: str, arr: list) -> Node:
+    """This function gets the node that belongs to the given label
+    in a given array
+    @param label the label of the element desired
+    @param arr the list of nodes to search for
+    @returns the Node with the given label or None if it is not present
+    """
+    for i in arr:
+        if i.key == label:
+            return i
+    return None
+
+
 def get_roots(element: Node) -> set:
     """ Gets the roots of a given node
     @param element the element that you want to get
