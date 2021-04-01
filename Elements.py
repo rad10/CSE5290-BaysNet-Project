@@ -79,7 +79,7 @@ class Node:
     def get_dependencies(self) -> list:
         """Gets a list of all dependencies"""
         if self.probability_links:
-            return [self.probability_links[a] for a in self.probability_links]
+            return list(self.probability_links.values())
         return []
 
     def get_dependency(self, label: str) -> Node:
