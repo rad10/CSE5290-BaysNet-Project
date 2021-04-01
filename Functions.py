@@ -4,9 +4,7 @@ from copy import deepcopy
 
 def normalize(arr: list) -> list:
     total = sum(arr)
-    for i in range(len(arr)):
-        arr[i] /= total
-    return arr
+    return list(map(lambda x: x / total, arr))
 
 
 def get_roots(element: Node) -> set:
