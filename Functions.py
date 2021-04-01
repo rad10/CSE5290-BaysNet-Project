@@ -25,6 +25,15 @@ def get_roots(element: Node) -> set:
     return results
 
 
+def get_history(element: Node) -> set:
+    """ This function gets all of the dependencies of the given node, and
+    the dependencies of those all the way to the roots
+    @param element the node that you want to get the entire history of
+    @returns a set of all the nodes that the element remotely depends on
+    """
+    results = set(element.get_dependencies())
+    for elm in element.get_dependencies():
+        results.update(get_history(elm))
     return results
 
 
