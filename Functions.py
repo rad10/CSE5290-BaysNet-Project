@@ -8,6 +8,10 @@ def normalize(arr: list) -> list:
     return list(map(lambda x: x / total, arr))
 
 
+def Not(probability: float) -> float:
+    return 1 - probability
+
+
 def get_node(label: str, arr: list) -> Node:
     """This function gets the node that belongs to the given label
     in a given array
@@ -92,7 +96,7 @@ def enumeration_all(variables: list, observed: dict) -> float:
             else:
                 pval = package[node](state)[0]
             if not iters[conditional][node]:
-                pval = 1 - pval
+                pval = Not(pval)
 
             sum_vals[conditional] *= pval
 
@@ -106,7 +110,7 @@ def enumeration_all(variables: list, observed: dict) -> float:
     return sum(sum_vals)
 
 
-def enumeration_ask(vars, evidence, network):
+def enumeration_ask(vars: list, evidence: dict):
     # There has to be a query variable.
     if len(vars) == 0:
         return 1.0
