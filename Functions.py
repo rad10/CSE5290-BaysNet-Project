@@ -1,5 +1,4 @@
 from Elements import Node
-from copy import deepcopy
 from itertools import product
 
 
