@@ -76,11 +76,11 @@ class Node:
         """Adds a node as a dependency"""
         self.used_by.append(node)
 
-    def get_dependencies(self):
+    def get_dependencies(self)->list:
         """Gets a list of all dependencies"""
-        if (self.probability_links == None):
-            return None
-        return [a for a in self.probability_links]
+        if self.probability_links:
+            return [a for a in self.probability_links]
+        return []
 
     def get_dependency(self, label: str) -> Node:
         """Gets the node that this node depends on
