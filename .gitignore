@@ -1,3 +1,9 @@
+# Ignore git developer work
+*.bak
+*.patch
+*.rej
+*.note
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
