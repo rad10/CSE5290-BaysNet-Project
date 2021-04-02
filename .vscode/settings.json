@@ -1,5 +1,6 @@
 {
     "files.exclude": {
+        "**/__pycache__": true,
         "**/.pyc": true
     },
     "editor.detectIndentation": false,
@@ -15,6 +16,16 @@
     "files.trimTrailingWhitespace": true,
     "python.analysis.autoImportCompletions": true,
     "python.terminal.executeInFileDir": true,
+    "[diff]": {
+        "editor.detectIndentation": true,
+        "editor.trimAutoWhitespace": false,
+        "files.trimTrailingWhitespace": false,
+        "files.insertFinalNewline": false
+    },
+    "[plaintext]": {
+        "editor.detectIndentation": true,
+        "editor.wordWrap": "on"
+    },
     /* Git settings and validations */
     "git.fetchOnPull": true,
     "git.autofetch": true,
