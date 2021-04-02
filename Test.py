@@ -5,11 +5,11 @@ from Functions import *
 testGraph = Graph()
 
 # Create nodes.
-Burglary = Node("B", "Burglary", [0.001])
-Earthquake = Node("E", "Earthquake", [0.002])
-Alarm = Node("A", "Alarm", [0.95, 0.94, 0.29, 0.001], {"B": None, "E": None})
-JohnCall = Node("J", "John", [0.90, 0.05], {"A": None})
-MaryCall = Node("M", "Mary", [0.70, 0.01], {"A": None})
+Burglary = Node("B", "Burglary", 0.001)
+Earthquake = Node("E", "Earthquake", 0.002)
+Alarm = Node("A", "Alarm", 0.95, 0.94, 0.29, 0.001, B=None, E=None)
+JohnCall = Node("J", "John", 0.90, 0.05, A=None)
+MaryCall = Node("M", "Mary", 0.70, 0.01, A=None)
 
 # Add nodes to the graph.
 testGraph.add_node(Burglary)
