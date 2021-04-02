@@ -13,14 +13,14 @@ class Node:
     @date 2021-02-25
     """
 
-    def __init__(self, key: str, name: str, probability_values: list, probability_dependents: dict = None) -> None:
+    def __init__(self, key: str, name: str, *probability_values: float, **probability_dependents: Node) -> None:
         if probability_dependents:
             assert len(probability_values) >= 2 ** len(probability_dependents.keys()
                                                        ), f"Not enough truth table values given for amount of dependencies: {len(probability_values)} of {2 ** len(probability_dependents.keys())}"
         self.key = key
         self.name = name
         self.probability_links = probability_dependents
-        self.probability_values = tuple(probability_values)
+        self.probability_values = probability_values
         self.used_by = list()
 
     def __str__(self):
