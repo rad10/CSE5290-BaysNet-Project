@@ -33,10 +33,13 @@ testGraph.set_arc(Alarm, MaryCall)
 # MaryCall.print_table()
 
 
-# Test case. (P(J | M))
-queryVar = [JohnCall]
-# Note: In this example, this should be set to True at all times.
-evidence = [MaryCall]
+# print(Alarm())
+# print(Alarm(B=False, E=True))
+
+print(enumeration_all(MaryCall, M=True))
+print(enumeration_all(JohnCall, MaryCall, M=True))
+print(enumeration_ask(MaryCall))
+
 
 
 # print(Alarm())
