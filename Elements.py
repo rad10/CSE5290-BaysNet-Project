@@ -20,13 +20,13 @@ class Node:
         self.key = key
         self.name = name
         self.probability_links = probability_dependents
-        self.probability_values = probability_values
+        self.probability_values = tuple(probability_values)
         self.used_by = list()
 
     def __str__(self):
         return self.key
 
-    def __call__(self, **constant_deps: bool) -> list:
+    def __call__(self, **constant_deps: bool) -> tuple:
         # Checking if constants has vars that dont exist
         if (constant_deps):
             for c in constant_deps:
@@ -34,11 +34,11 @@ class Node:
                 ), f"{c} is not a dependency of {self}, {set(self.probability_links.keys())}"
         # check if there are no constant dependencies
         else:
-            return self.probability_values.copy()
+            return self.probability_values
         # now to iterate through all items
 
         # making copy of values to figure out final result via process of elimination
-        results = self.probability_values.copy()
+        results = list(self.probability_values)
         headers = list(self.probability_links.keys())
 
         def elimination(ind: int, adjust: int = 0) -> None:
@@ -65,7 +65,7 @@ class Node:
         while results.count(None) > 0:
             results.remove(None)
 
-        return results
+        return tuple(results)
 
     def link_source(self, node: Node) -> None:
         """Sets a node to be a source for a given value
@@ -76,11 +76,11 @@ class Node:
         """Adds a node as a dependency"""
         self.used_by.append(node)
 
-    def get_dependencies(self) -> list:
+    def get_dependencies(self) -> tuple:
         """Gets a list of all dependencies"""
         if self.probability_links:
-            return list(self.probability_links.values())
-        return []
+            return tuple(self.probability_links.values())
+        return tuple()
 
     def get_dependency(self, label: str) -> Node:
         """Gets the node that this node depends on
@@ -89,9 +89,9 @@ class Node:
         """
         return self.probability_links[label]
 
-    def get_dependents(self) -> list:
+    def get_dependents(self) -> tuple:
         """Gives a list of all nodes that depend on this node"""
-        return self.used_by
+        return tuple(self.used_by)
 
     def print_table(self) -> None:
         """Prints a formatted table of all the stats of the given node"""
@@ -133,7 +133,7 @@ class Graph:
         results = list()  # our results list that
         for node in self.network:
             # Checks if the dependencies actually doesnt exist
-            if (node.get_dependencies() in [None, []]):
+            if (node.get_dependencies() in [None, list(), tuple(), set()]):
                 results.append(node)
         return results
 
