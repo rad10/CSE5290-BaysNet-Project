@@ -26,11 +26,12 @@ testGraph.set_arc(Alarm, JohnCall)
 testGraph.set_arc(Alarm, MaryCall)
 
 # Print tables.
-Burglary.print_table()
-Earthquake.print_table()
-Alarm.print_table()
-JohnCall.print_table()
-MaryCall.print_table()
+# Burglary.print_table()
+# Earthquake.print_table()
+# Alarm.print_table()
+# JohnCall.print_table()
+# MaryCall.print_table()
+
 
 # Test case. (P(J | M))
 queryVar = [JohnCall]
