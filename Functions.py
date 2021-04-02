@@ -54,14 +54,12 @@ def get_history(element: Node) -> set:
     return results
 
 
-def __enum(variables: list, observed: dict) -> list:
+def __enum(target: Node, *given: Node, **observed: bool) -> list:
     # Get given variable that enumerate all gets probability for
-    given: Node = variables[0]
-    spackage = set()
-    if len(variables) > 1:
-        spackage.update(variables[1:])
+    spackage = get_history(target)
+    spackage.update(given)
     # include everything up to roots
-    for i in variables:
+    for i in given:
         spackage.update(get_history(i))
 
     # convert back to list to keep indexes
@@ -96,21 +94,21 @@ def __enum(variables: list, observed: dict) -> list:
             sum_vals[conditional] *= pval
 
         # Getting dictionary differences for the given variable
-        pstate = spackage.intersection(given.get_dependencies())
+        pstate = spackage.intersection(target.get_dependencies())
         state = dict()
         for s in pstate:
             state[s.key] = iters[conditional][package.index(s)]
 
-        sum_vals[conditional] *= given(**state)[0]
+        sum_vals[conditional] *= target(**state)[0]
     return sum_vals
 
 
-def enumeration_all(variables: list, observed: dict) -> float:
+def enumeration_all(target: Node = None, *given: Node, **observed: bool) -> float:
     # contingency if variables is empty
-    if len(variables) == 0:
+    if not target:
         return 1
-    return sum(__enum(variables, observed))
+    return sum(__enum(target, *given, **observed))
 
 
-def enumeration_ask(vars: list, evidence: dict) -> list:
-    return normalize(__enum(vars, evidence))
+def enumeration_ask(target: Node = None, *vars: Node, **evidence: bool) -> list:
+    return normalize(__enum(target, *vars, **evidence))
