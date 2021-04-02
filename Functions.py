@@ -89,7 +89,7 @@ def __enum(variables: list, observed: dict) -> list:
             if (len(pstate) == 0):
                 pval = package[node]()[0]
             else:
-                pval = package[node](state)[0]
+                pval = package[node](**state)[0]
             if not iters[conditional][node]:
                 pval = Not(pval)
 
@@ -101,7 +101,7 @@ def __enum(variables: list, observed: dict) -> list:
         for s in pstate:
             state[s.key] = iters[conditional][package.index(s)]
 
-        sum_vals[conditional] *= given(state)[0]
+        sum_vals[conditional] *= given(**state)[0]
     return sum_vals
 
 

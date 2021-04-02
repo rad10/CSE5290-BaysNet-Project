@@ -26,14 +26,14 @@ class Node:
     def __str__(self):
         return self.key
 
-    def __call__(self, constant_deps: dict = None) -> list:
+    def __call__(self, **constant_deps: bool) -> list:
         # Checking if constants has vars that dont exist
-        if (constant_deps != None):
+        if (constant_deps):
             for c in constant_deps:
                 assert c in self.probability_links.keys(
                 ), f"{c} is not a dependency of {self}, {set(self.probability_links.keys())}"
         # check if there are no constant dependencies
-        if (constant_deps == None):
+        else:
             return self.probability_values.copy()
         # now to iterate through all items
 
