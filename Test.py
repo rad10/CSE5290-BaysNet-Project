@@ -1,4 +1,3 @@
-from BaysNet import Node, Graph
 from BaysNet.Elements import *
 from BaysNet.Functions import *
 
