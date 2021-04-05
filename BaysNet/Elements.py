@@ -138,7 +138,13 @@ class Node:
 
 
 class Graph:
+    """Creates a graph that contains all nodes.
+    Currently deprecated.
+    """
+
     def __init__(self) -> None:
+        """Initialize a graph. Takes no parameters
+        """
         self.network: list = list()
         self.arcs = 0
 
