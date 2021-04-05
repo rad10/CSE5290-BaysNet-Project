@@ -1,5 +1,10 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+"""The Functions Module contains functions that are either used by probability
+or that are used for manipulating Node Elements.
+
+@author Nicholas Cottrell
+@author Justyn Diaz
+@date 2021-04-05
+"""
 
 from .Elements import Node
 from itertools import product

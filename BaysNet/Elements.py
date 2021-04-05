@@ -1,5 +1,11 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+"""The Elements module is where all element classes are stored.
+Mostly holds the Node and Graph classes.
+
+@author Nicholas Cottrell
+@author Justyn Diaz
+@date 2021-04-05
+"""
+
 
 class Node:
     ...
