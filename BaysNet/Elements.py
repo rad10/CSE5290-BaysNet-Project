@@ -16,6 +16,16 @@ class Node:
     """
 
     def __init__(self, key: str, name: str, *probability_values: float, **probability_dependents: Node) -> None:
+        """Initiate a Node Object
+        @param key A Character that represents that node within the network.
+        This is very important is its how dependents recognize the Node.
+        @param name The official name of the node. Can be used for description and clarification
+        @param probability_values specify in order what probability the node is
+        equal to based on its given values. there must be a specific amount of values based on
+        the given dependencies.
+        @param probability_dependents the node keys that can be paired with their respective nodes.
+        @asserts that len(probability_values) = 2^len(probability_dependents)
+        """
         if probability_dependents:
             assert len(probability_values) >= 2 ** len(probability_dependents.keys()
                                                        ), f"Not enough truth table values given for amount of dependencies: {len(probability_values)} of {2 ** len(probability_dependents.keys())}"
