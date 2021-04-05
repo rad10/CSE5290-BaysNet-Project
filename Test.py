@@ -1,5 +1,6 @@
-from Elements import *
-from Functions import *
+from BaysNet import Node, Graph
+from BaysNet.Elements import *
+from BaysNet.Functions import *
 
 # Create graph.
 testGraph = Graph()
@@ -28,7 +29,7 @@ testGraph.set_arc(Alarm, MaryCall)
 # Print tables.
 # Burglary.print_table()
 # Earthquake.print_table()
-# Alarm.print_table()
+Alarm.print_table()
 # JohnCall.print_table()
 # MaryCall.print_table()
 

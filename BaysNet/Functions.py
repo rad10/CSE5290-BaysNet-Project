@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from Elements import Node
+from .Elements import Node
 from itertools import product
 
 
