@@ -6,11 +6,18 @@ from itertools import product
 
 
 def normalize(arr: list) -> list:
+    """Normalizes a list of numbers based on the sum of all its values
+    """
     total = sum(arr)
     return list(map(lambda x: x / total, arr))
 
 
 def Not(probability: float) -> float:
+    """Probabilistic not function.
+    @param probability a float number that represents the probability of a
+    fact being true.
+    @returns a float probability of a fact not being true.
+    """
     return 1 - probability
 
 
