@@ -39,6 +39,14 @@ class Node:
         return self.key
 
     def __call__(self, **constant_deps: bool) -> tuple:
+        """Calculates the possible probabilities based on given truths. The truths
+        are based on node keys and setting what they are as a constant.
+        @param constant_deps a dictionary of nodes with their keys matched with
+        their boolean constant values.
+        @returns a tuple that contains all possible probabilities based on the
+        dependencies given.
+        @asserts that all dependencies given are actual dependencies of this node.
+        """
         # Checking if constants has vars that dont exist
         if (constant_deps):
             for c in constant_deps:
