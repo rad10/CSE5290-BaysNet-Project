@@ -40,23 +40,3 @@ Alarm.print_table()
 print(enumeration_all(MaryCall, M=True))
 print(enumeration_all(JohnCall, MaryCall, M=True))
 print(enumeration_ask(MaryCall))
-
-
-# My tests on special args
-# def func(**args: bool):
-#     print(type(args))
-#     print(args)
-#     print(len(args))
-#     print(bool(args))
-
-
-# def sfunc(query: str, *given: str, **observed: bool):
-#     print(query, given, observed)
-#     print(type(given), type(observed))
-#     print(bool(given), bool(observed))
-
-
-# func()
-# sfunc("A")
-# func(A=True, B=False, C="Hello", D=None)
-# sfunc("A", "B", "C", "D", B=True, C=True, D=False)
