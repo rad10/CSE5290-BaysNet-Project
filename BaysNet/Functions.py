@@ -114,6 +114,15 @@ def __enum(target: Node, *given: Node, **observed: bool) -> list:
 
 
 def enumeration_all(target: Node = None, *given: Node, **observed: bool) -> float:
+    """Returns the absolute probability of a node given certain environment variables.
+    @param target the node that you want to get the whole probability of its success.
+    @param given nodes that are given to have been used in finding the targets
+    probability.
+    @param observed a dictionary of values acting as the probabilities that are
+    a constant chance.
+    @returns a probability value of that target being true in any circumstance
+    based on observed truths.
+    """
     # contingency if variables is empty
     if not target:
         return 1
@@ -121,4 +130,13 @@ def enumeration_all(target: Node = None, *given: Node, **observed: bool) -> floa
 
 
 def enumeration_ask(target: Node = None, *vars: Node, **evidence: bool) -> list:
+    """Ask for all potential probabilities of a given node being true and asks
+    for that distribution.
+    @param target the node that you want to get the whole probability of its success.
+    @param vars nodes that are given to have been used in finding the targets
+    probability.
+    @param evidence a dictionary of values acting as the probabilities that are
+    a constant chance.
+    @returns a normalized distribution of the given variable.
+    """
     return normalize(__enum(target, *vars, **evidence))
